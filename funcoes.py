@@ -6,12 +6,24 @@ def printa(mat):
         print("|", mat[i][:3], "|", mat[i][3:6], "|", mat[i][6:9], "|")
     print("-------------------------------------")
 
+
+#------------------------------------ PRINTA ---------------------------------------
+def printaprob(mat):
+    for i in mat:
+        for j in i:
+            print(j, end='')
+    print()
+
 #--------------------- Converte o vetor de String para uma matriz de int ---------------------
 def convertor(mat):
     matConvertida = []
     for i in range(9):
         linha = []
-        linha = [int(x) for x in mat[i]]
+        for x in mat[i]:
+            if x == '.':
+                linha.append(0)
+            else:
+                linha.append(int(x))
         matConvertida.append(linha)
     return matConvertida
 
@@ -25,12 +37,9 @@ def tembranco(mat):
 
 #--------------------------------- Verifição das regras ---------------------------------------
 def verificacao(i, l, c, mat):
-    flag = 1
-    flag &= linha(l, i, mat)
-    flag &= coluna(c, i, mat)
-    flag &= minimatriz(l, c, i, mat)
-    flag *= i
-    return flag
+    if linha(l, i, mat) and coluna(c, i, mat) and minimatriz(l, c, i, mat):
+        return 1
+    return 0
 
 #----------------------------------- Verificação da linha -------------------------------------
 def linha(l, valor, mat):
@@ -55,3 +64,4 @@ def minimatriz(l, c, valor, mat):
             if valor == mat[i][j]:
                 return 0
     return 1
+
